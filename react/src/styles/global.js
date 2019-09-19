@@ -28,4 +28,25 @@ export default createGlobalStyle`
     button {
         cursor: pointer;
     }
+
+    .container {
+        margin: 0 auto;
+        padding-top: 60px;
+        width: 80%;
+    }
+
+    .logo {
+        background: #fff;
+        border-radius: 25px;
+        display: block;
+        position: absolute;
+        width: 41px;
+        height: 41px;
+        margin: 35px;
+
+        svg {
+            margin-top: -3px;
+            margin-left: -3px;
+        }
+    }
 `;
