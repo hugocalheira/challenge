@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const AlbumCard = styled.li`
+export const Item = styled.li`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0.5rem;
 
     width: 170px;
 
@@ -22,6 +23,4 @@ export const AlbumCard = styled.li`
     span {
         color: #999;
     }
-    
-    
 `;

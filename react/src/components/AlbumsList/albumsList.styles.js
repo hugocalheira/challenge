@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 60px .5rem;
+    padding: 60px 0.5rem;
 
     h2 {
         color: #fafafa;
@@ -11,10 +11,10 @@ export const Content = styled.div`
         font-weight: normal;
         margin-bottom: 2rem;
     }
-
 `;
 
 export const List = styled.ul`
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Search = styled.div`
     display: flex;
     flex-direction: column;
-    padding: .5rem;
+    padding: 0.5rem;
 
     span {
         display: block;
@@ -15,7 +15,7 @@ export const Search = styled.div`
         background-color: transparent;
         font-size: 48px;
         font-weight: bold;
-        padding: .5rem;
+        padding: 0.5rem;
         color: #fff;
         border: 0;
         border-bottom: 1px solid #999;
