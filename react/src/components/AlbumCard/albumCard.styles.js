@@ -4,7 +4,7 @@ export const Item = styled.li`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0.5rem;
+    margin: 1rem 0.5rem ;
 
     width: 170px;
 
@@ -14,13 +14,24 @@ export const Item = styled.li`
         background: #fafafa;
     }
 
-    a {
+    div.card {
         text-decoration: none;
         color: #fafafa;
-        margin: 12px auto;
+        text-align: center;
+        cursor: pointer;
+        transition: filter .3s;
+
+        &:hover{
+            filter: brightness(1.5)
+        }
+
+        p {
+            margin: 12px auto;
+        }
+    
+        span {
+            color: #999;
+        }
     }
 
-    span {
-        color: #999;
-    }
 `;

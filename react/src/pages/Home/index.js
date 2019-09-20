@@ -14,6 +14,10 @@ export default function Home() {
                 title="Álbuns buscados recentemente"
                 data={[1, 2, 3, 4, 5]}
             />
+            <AlbumsList
+                title="Artistas buscados recentemente"
+                data={[1, 2, 3, 4, 5]}
+            />
         </>
     );
 }
