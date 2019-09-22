@@ -1,6 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-export const Content = styled.div`
+const rotate = keyframes`
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+`;
+
+export const Content = styled.div.attrs(props => ({
+    disabled: props.isLoading,
+}))`
     display: flex;
     flex-direction: column;
     padding: 60px 0.5rem;
@@ -11,6 +22,15 @@ export const Content = styled.div`
         font-weight: normal;
         margin-bottom: 2rem;
     }
+
+    ${props =>
+        props.isLoading &&
+        css`
+            svg {
+                align-self: center;
+                animation: ${rotate} 1.5s linear infinite;
+            }
+        `}
 `;
 
 export const List = styled.ul`

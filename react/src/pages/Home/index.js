@@ -5,6 +5,7 @@ import AlbumsList from '../../components/AlbumsList/AlbumsList';
 import api from '../../services/api';
 
 export default function Home() {
+    const [loading, setLoading] = useState(false);
     const [artists, setArtists] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [tracks, setTracks] = useState([]);
@@ -14,9 +15,9 @@ export default function Home() {
 
     const handleSubmit = async e => {
         e.preventDefault();
+        setLoading(true);
 
         const accessToken = sessionStorage.getItem('access_token');
-
         const config = {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -39,6 +40,7 @@ export default function Home() {
         if (response.data.tracks && response.data.tracks.items) {
             setTracks(response.data.tracks.items);
         }
+        setLoading(false);
     };
 
     return (
@@ -58,16 +60,19 @@ export default function Home() {
                 title="Artistas buscados recentemente"
                 data={artists}
                 type="artist"
+                loading={loading}
             />
             <AlbumsList
                 title="Álbuns buscados recentemente"
                 data={albums}
                 type="album"
+                loading={loading}
             />
             <AlbumsList
                 title="Músicas buscadas recentemente"
                 data={tracks}
                 type="track"
+                loading={loading}
             />
         </>
     );
