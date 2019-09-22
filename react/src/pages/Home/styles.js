@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const Search = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+    }
 
     span {
         display: block;
