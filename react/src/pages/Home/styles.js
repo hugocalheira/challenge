@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export const Search = styled.div`
-    form {
-        display: flex;
-        flex-direction: column;
-        padding: 0.5rem;
-    }
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
 
     span {
         display: block;
@@ -27,4 +25,12 @@ export const Search = styled.div`
             color: #999;
         }
     }
+`;
+
+export const Title = styled.h2`
+    color: #fafafa;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 2rem;
+    padding: 60px 0.5rem 0;
 `;
