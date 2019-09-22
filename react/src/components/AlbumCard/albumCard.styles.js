@@ -28,9 +28,10 @@ export const Item = styled.li`
         text-align: center;
         cursor: pointer;
         transition: filter 0.3s;
+        filter: brightness(0.9);
 
         &:hover {
-            filter: brightness(1.5);
+            filter: brightness(1.2) drop-shadow(2px 4px 6px black);
         }
 
         p {
