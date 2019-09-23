@@ -109,6 +109,7 @@ export const Content = styled.div`
 
         @media screen and (max-width: 899px) {
             margin: 1rem 0;
+            width: 100%;
 
             button {
                 margin-left: 0rem;
