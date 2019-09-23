@@ -6,7 +6,7 @@ import { Photo, NotAvailable } from './picture.styles';
 
 export default function Picture({ item, type, plusSize }) {
     function getPicture() {
-        if (type !== 'track') {
+        if (type !== 'tracks') {
             return item.images.length ? item.images[1].url : '';
         }
         const { album } = item;
@@ -14,7 +14,7 @@ export default function Picture({ item, type, plusSize }) {
     }
 
     function getAltName() {
-        if (type !== 'track') {
+        if (type !== 'tracks') {
             return item.name;
         }
         return item.album.name;

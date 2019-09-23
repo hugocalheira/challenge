@@ -58,3 +58,25 @@ export const Title = styled.h2`
         }
     }
 `;
+
+export const Back = styled.div`
+    a {
+        display: inline-block;
+        color: #fafafa;
+        text-decoration: none;
+        margin-bottom: 1.5rem;
+
+        &:hover {
+            color: #fff;
+        }
+
+        svg {
+            margin-right: 0.5rem;
+        }
+    }
+
+    @media screen and (max-width: 899px) {
+        display: flex;
+        justify-content: flex-end;
+    }
+`;
