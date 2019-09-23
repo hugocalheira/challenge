@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Title } from './styles';
 import AlbumsList from '../../components/AlbumsList/AlbumsList';
 import api from '../../services/api';
+import { isAuthenticated } from '../../services/auth';
 
 export default function Home() {
     const [loading, setLoading] = useState(false);
@@ -26,21 +27,27 @@ export default function Home() {
                 },
             };
 
-            const response = await api.get(
-                `/search?q=${search}&type=artist,album,track`,
-                config
-            );
+            try {
+                const response = await api.get(
+                    `/search?q=${search}&type=artist,album,track`,
+                    config
+                );
 
-            if (response.data.artists && response.data.artists.items) {
-                setArtists(response.data.artists.items);
-            }
+                if (response.data.artists && response.data.artists.items) {
+                    setArtists(response.data.artists.items);
+                }
 
-            if (response.data.albums && response.data.albums.items) {
-                setAlbums(response.data.albums.items);
-            }
+                if (response.data.albums && response.data.albums.items) {
+                    setAlbums(response.data.albums.items);
+                }
 
-            if (response.data.tracks && response.data.tracks.items) {
-                setTracks(response.data.tracks.items);
+                if (response.data.tracks && response.data.tracks.items) {
+                    setTracks(response.data.tracks.items);
+                }
+            } catch (err) {
+                sessionStorage.removeItem('access_token');
+                isAuthenticated();
+                return;
             }
             setLoading(false);
         }
@@ -60,7 +67,7 @@ export default function Home() {
             </Search>
 
             {search.length !== 0 && !loading && (
-                <Title>Resultados encontrados para "{search}":</Title>
+                <Title>{`Resultados encontrados para "${search}":`}</Title>
             )}
 
             {artists.length > 0 && (

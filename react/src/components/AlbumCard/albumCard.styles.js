@@ -26,6 +26,7 @@ export const Item = styled.li`
         text-decoration: none;
         color: #fafafa;
         text-align: center;
+        font-size: 14px;
         cursor: pointer;
         transition: filter 0.3s;
         filter: brightness(0.9);
@@ -35,7 +36,7 @@ export const Item = styled.li`
         }
 
         p {
-            margin: 12px auto;
+            margin: 10px auto;
         }
 
         span {
