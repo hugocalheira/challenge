@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaChevronLeft, FaPlay, FaPause } from 'react-icons/fa';
+import PropTypes from 'prop-types';
+import { FaChevronLeft, FaPlay, FaPause, FaBan } from 'react-icons/fa';
+
 import AlbumCard from '../../components/AlbumCard/AlbumCard';
 import api from '../../services/api';
 import { isAuthenticated } from '../../services/auth';
-
 import { Back, Content } from './styles';
 
 export default function Albums({ match }) {
@@ -72,6 +73,7 @@ export default function Albums({ match }) {
                         <div>
                             {album.tracks.items.map(track => (
                                 <button
+                                    disabled={!track.preview_url}
                                     className={
                                         playing && playing.id === track.id
                                             ? 'playing'
@@ -83,6 +85,15 @@ export default function Albums({ match }) {
                                 >
                                     <span>{track.name}</span>
                                     <span className="time">
+                                        <span
+                                            className={
+                                                track.preview_url === null
+                                                    ? 'disabled'
+                                                    : 'enabled'
+                                            }
+                                        >
+                                            <FaBan />
+                                        </span>
                                         <span className="control">
                                             {playing &&
                                             playing.id === track.id ? (
@@ -104,3 +115,7 @@ export default function Albums({ match }) {
         </>
     );
 }
+
+Albums.propTypes = {
+    match: PropTypes.object.isRequired,
+};
