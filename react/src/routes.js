@@ -23,6 +23,10 @@ export default function Routes() {
                     component={props => <Albums {...props} />}
                 />
                 <PrivateRoute
+                    path="/artists/:id"
+                    component={props => <Home {...props} />}
+                />
+                <PrivateRoute
                     path={process.env.URL_CALLBACK}
                     component={() => {
                         return <Redirect to="/" />;

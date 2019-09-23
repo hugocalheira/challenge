@@ -39,7 +39,13 @@ export const Item = styled.li.attrs(props => ({
         }
     }
 
+    button {
+        position: relative;
+    }
+
     .card {
+        border: 0;
+        background: none;
         text-decoration: none;
         color: #fafafa;
         text-align: center;
@@ -48,8 +54,25 @@ export const Item = styled.li.attrs(props => ({
         transition: filter 0.3s;
         filter: brightness(0.9);
 
+        .control {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+        }
+
+        &.playing,
         &:hover {
             filter: brightness(1.2) drop-shadow(2px 4px 6px black);
+            .control {
+                display: block;
+                font-size: 3rem;
+                color: rgba(255, 255, 255, 0.5);
+                svg {
+                    text-shadow: 2px 4px 24px 0 black;
+                }
+            }
         }
 
         ${props =>
