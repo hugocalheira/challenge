@@ -18,7 +18,7 @@ export default function Routes() {
             <Switch>
                 <PrivateRoute path="/" exact component={Home} />
                 <PrivateRoute
-                    path="/albums"
+                    path="/albums/:id"
                     component={props => <Albums {...props} />}
                 />
                 <PrivateRoute

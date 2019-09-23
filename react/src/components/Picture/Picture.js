@@ -4,7 +4,7 @@ import { FaMusic } from 'react-icons/fa';
 
 import { Photo, NotAvailable } from './picture.styles';
 
-export default function Picture({ item, type }) {
+export default function Picture({ item, type, plusSize }) {
     function getPicture() {
         if (type !== 'track') {
             return item.images.length ? item.images[1].url : '';
@@ -23,9 +23,13 @@ export default function Picture({ item, type }) {
     return (
         <>
             {getPicture() ? (
-                <Photo alt={getAltName()} src={getPicture()} />
+                <Photo
+                    alt={getAltName()}
+                    src={getPicture()}
+                    plusSize={plusSize}
+                />
             ) : (
-                <NotAvailable>
+                <NotAvailable plusSize={plusSize}>
                     <FaMusic />
                 </NotAvailable>
             )}
@@ -36,4 +40,9 @@ export default function Picture({ item, type }) {
 Picture.propTypes = {
     type: PropTypes.string.isRequired,
     item: PropTypes.object.isRequired,
+    plusSize: PropTypes.bool,
+};
+
+Picture.defaultProps = {
+    plusSize: false,
 };
