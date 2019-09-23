@@ -1,6 +1,11 @@
 export async function authenticate() {
-    const urlCallback = 'http://localhost:8080/callback';
-    const clientId = 'b440c03e16254d03a1d66015ada06a96';
+    const urlCallback = `${process.env.APP_URL + process.env.URL_CALLBACK}`;
+    const clientId = process.env.SPOTIFY_CLIENT_ID || false;
+
+    if (!clientId)
+        throw new Error(
+            'You should inform a SPOTIFY_CLIENT_ID in ".env" file.\nMore information: https://developer.spotify.com/dashboard\n'
+        );
 
     const hashParams = {};
     let e;
