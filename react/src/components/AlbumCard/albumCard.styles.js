@@ -1,16 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Item = styled.li`
+export const Item = styled.li.attrs(props => ({
+    plusSize: props.plusSize,
+}))`
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 1rem 0.5rem;
-    max-width: 170px;
 
-    img {
-        width: 170px;
-        height: 170px;
-    }
+    ${props => (props.plusSize ? `max-width: 300px` : `max-width: 170px`)}
 
     .notAvailable {
         width: 170px;
@@ -22,7 +20,7 @@ export const Item = styled.li`
         font-size: 48px;
     }
 
-    div.card {
+    .card {
         text-decoration: none;
         color: #fafafa;
         text-align: center;
@@ -35,9 +33,19 @@ export const Item = styled.li`
             filter: brightness(1.2) drop-shadow(2px 4px 6px black);
         }
 
-        p {
-            margin: 10px auto;
-        }
+        ${props =>
+            props.plusSize
+                ? css`
+                      p {
+                          font-size: 18px;
+                          margin: 14px auto;
+                      }
+                  `
+                : css`
+                      p {
+                          margin: 10px auto;
+                      }
+                  `}
 
         span {
             color: #999;
