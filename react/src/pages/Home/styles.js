@@ -25,6 +25,22 @@ export const Search = styled.div`
             color: #999;
         }
     }
+
+    @media screen and (max-width: 899px) {
+        margin-top: 3rem;
+
+        input {
+            font-size: 36px;
+        }
+    }
+
+    @media screen and (max-width: 667px) {
+        margin-top: 2rem;
+
+        input {
+            font-size: 24px;
+        }
+    }
 `;
 
 export const Title = styled.h2`
@@ -33,4 +49,12 @@ export const Title = styled.h2`
     font-weight: normal;
     margin-bottom: 2rem;
     padding: 60px 0.5rem 0;
+    @media screen and (max-width: 667px) {
+        padding: 30px 0.5rem 0;
+        margin-bottom: 1rem;
+
+        input {
+            font-size: 16px;
+        }
+    }
 `;

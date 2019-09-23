@@ -10,6 +10,11 @@ export const Item = styled.li.attrs(props => ({
 
     ${props => (props.plusSize ? `max-width: 300px` : `max-width: 170px`)}
 
+    @media screen and (max-width: 899px) {
+        ${props => (props.plusSize ? `width: 284px` : `max-width: 170px`)}
+        margin: 0;
+    }
+
     .notAvailable {
         width: 170px;
         height: 170px;

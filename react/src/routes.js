@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Home from './pages/Home';
 import Albums from './pages/Albums';
@@ -31,3 +32,7 @@ export default function Routes() {
         </BrowserRouter>
     );
 }
+
+PrivateRoute.propTypes = {
+    component: PropTypes.any.isRequired,
+};

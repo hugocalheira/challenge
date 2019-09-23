@@ -15,11 +15,23 @@ export const Back = styled.div`
             margin-right: 0.5rem;
         }
     }
+
+    @media screen and (max-width: 899px) {
+        display: flex;
+        justify-content: flex-end;
+    }
 `;
 
 export const Content = styled.div`
     margin: 1rem 0.5rem;
     display: flex;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 899px) {
+        margin: 1rem 0;
+        flex-direction: column;
+        align-items: center;
+    }
 
     div {
         counter-reset: button;
@@ -34,10 +46,10 @@ export const Content = styled.div`
             width: 100%;
             background: none;
             margin-left: 5rem;
-            padding: 0.75rem;
+            padding: 0.75rem 5rem 0.75rem 0.75rem;
             counter-increment: button;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: space-between;
             cursor: pointer;
 
@@ -70,6 +82,7 @@ export const Content = styled.div`
             .time {
                 color: #999;
                 margin-left: 0.5rem;
+                display: flex;
             }
 
             &.playing,
@@ -90,10 +103,21 @@ export const Content = styled.div`
 
             span:first-child {
                 transition: all 0.6s;
+                text-align: left;
             }
         }
 
-        div {
+        @media screen and (max-width: 899px) {
+            margin: 1rem 0;
+
+            button {
+                margin-left: 0rem;
+                padding: 0.75rem 0;
+
+                &::before {
+                    margin-left: -1.5em;
+                }
+            }
         }
     }
 `;

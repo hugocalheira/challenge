@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Title } from './styles';
 import AlbumsList from '../../components/AlbumsList/AlbumsList';
 import api from '../../services/api';
-import { isAuthenticated } from '../../services/auth';
+import { isAuthenticated, getHeadersAuthorization } from '../../services/auth';
 
 export default function Home() {
     const [loading, setLoading] = useState(false);
@@ -16,22 +16,31 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchData() {
-            if (search.length === 0) return;
-
             setLoading(true);
 
-            const accessToken = sessionStorage.getItem('access_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            };
-
             try {
-                const response = await api.get(
-                    `/search?q=${search}&type=artist,album,track`,
-                    config
-                );
+                const strResults = sessionStorage.getItem('last_results');
+
+                let response = { data: null };
+                if (search.length === 0) {
+                    response = {
+                        data: JSON.parse(strResults) || {
+                            artists: [],
+                            albums: [],
+                            tracks: [],
+                        },
+                    };
+                } else {
+                    response = await api.get(
+                        `/search?q=${search}&type=artist,album,track`,
+                        getHeadersAuthorization()
+                    );
+
+                    sessionStorage.setItem(
+                        'last_results',
+                        JSON.stringify(response.data)
+                    );
+                }
 
                 if (response.data.artists && response.data.artists.items) {
                     setArtists(response.data.artists.items);
@@ -70,20 +79,20 @@ export default function Home() {
                 <Title>{`Resultados encontrados para "${search}":`}</Title>
             )}
 
-            {artists.length > 0 && (
-                <AlbumsList
-                    title="Artistas"
-                    data={artists}
-                    type="artist"
-                    loading={loading}
-                />
-            )}
-
             {albums.length > 0 && (
                 <AlbumsList
                     title="Álbuns"
                     data={albums}
                     type="album"
+                    loading={loading}
+                />
+            )}
+
+            {artists.length > 0 && (
+                <AlbumsList
+                    title="Artistas"
+                    data={artists}
+                    type="artist"
                     loading={loading}
                 />
             )}
