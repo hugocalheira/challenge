@@ -72,6 +72,7 @@ export default function Home() {
                     placeholder="Comece a escrever..."
                     onChange={handleChange}
                     value={search}
+                    autoFocus
                 />
             </Search>
 

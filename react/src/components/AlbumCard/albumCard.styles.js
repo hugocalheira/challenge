@@ -11,8 +11,17 @@ export const Item = styled.li.attrs(props => ({
     ${props => (props.plusSize ? `max-width: 300px` : `max-width: 170px`)}
 
     @media screen and (max-width: 899px) {
-        ${props => (props.plusSize ? `width: 284px` : `max-width: 170px`)}
-        margin: 0;
+        ${props =>
+            props.plusSize
+                ? `width: 284px`
+                : `max-width: 170px`} /* margin: 0; */
+    }
+
+    @media screen and (max-width: 499px) {
+        ${props =>
+            props.plusSize
+                ? `width: 284px`
+                : `max-width: 100%; width: 100%;`} /* margin: 0; */
     }
 
     .notAvailable {
@@ -23,6 +32,11 @@ export const Item = styled.li.attrs(props => ({
         align-items: center;
         justify-content: center;
         font-size: 48px;
+
+        @media screen and (max-width: 499px) {
+            width: 284px;
+            height: 284px;
+        }
     }
 
     .card {
