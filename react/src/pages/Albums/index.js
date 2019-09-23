@@ -5,7 +5,7 @@ import { FaChevronLeft, FaPlay, FaPause, FaBan } from 'react-icons/fa';
 
 import AlbumCard from '../../components/AlbumCard/AlbumCard';
 import api from '../../services/api';
-import { isAuthenticated } from '../../services/auth';
+import { isAuthenticated, getHeadersAuthorization } from '../../services/auth';
 import { Back, Content } from './styles';
 
 export default function Albums({ match }) {
@@ -17,14 +17,11 @@ export default function Albums({ match }) {
         async function fetchData() {
             setLoading(true);
             const { id: albumId } = match.params;
-            const accessToken = sessionStorage.getItem('access_token');
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            };
             try {
-                const response = await api.get(`/albums/${albumId}`, config);
+                const response = await api.get(
+                    `/albums/${albumId}`,
+                    getHeadersAuthorization()
+                );
                 if (response.data) {
                     setAlbum(response.data);
                     setLoading(false);

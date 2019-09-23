@@ -1,6 +1,6 @@
 export async function authenticate() {
     const urlCallback = 'http://localhost:8080/callback';
-    const clientId = '4803f7e865be449e8ec8d31777e1af47';
+    const clientId = 'b440c03e16254d03a1d66015ada06a96';
 
     const hashParams = {};
     let e;
@@ -27,4 +27,13 @@ export const isAuthenticated = () => {
         authenticate();
     }
     return accessToken || false;
+};
+
+export const getHeadersAuthorization = () => {
+    const accessToken = sessionStorage.getItem('access_token');
+    return {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
 };
