@@ -41,6 +41,20 @@ export const Content = styled.div`
             justify-content: space-between;
             cursor: pointer;
 
+            .enabled {
+                display: none;
+            }
+
+            &:disabled {
+                cursor: default;
+                color: #666;
+
+                .disabled {
+                    display: inline-block;
+                    padding-right: 10px;
+                }
+            }
+
             &::before {
                 content: counter(button) '.';
                 color: #999;
@@ -59,10 +73,13 @@ export const Content = styled.div`
             }
 
             &.playing,
-            &:hover {
+            &:hover:not(:disabled) {
                 .control {
                     display: inline-block;
                     font-size: 14px;
+                    svg {
+                        margin-right: 1rem;
+                    }
                 }
                 span:first-child {
                     filter: drop-shadow(0px 0px 5px black);
