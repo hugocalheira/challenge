@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const rotate = keyframes`
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+`;
 
 export const Back = styled.div`
     a {
@@ -23,6 +32,19 @@ export const Back = styled.div`
 `;
 
 export const Content = styled.div`
+
+    ${props =>
+        props.isLoading &&
+        css`
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                align-self: center;
+                animation: ${rotate} 1.5s linear infinite;
+            }
+    `}
+
     margin: 1rem 0.5rem;
     display: flex;
     flex-wrap: wrap;

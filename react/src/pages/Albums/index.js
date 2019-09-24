@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FaChevronLeft, FaPlay, FaPause, FaBan } from 'react-icons/fa';
+import { FaChevronLeft, FaPlay, FaPause, FaBan, FaSpinner } from 'react-icons/fa';
 
 import AlbumCard from '../../components/AlbumCard/AlbumCard';
 import api from '../../services/api';
@@ -11,7 +11,7 @@ import { Back, Content } from './styles';
 export default function Albums({ match }) {
     const [album, setAlbum] = useState(false);
     const [playing, setPlaying] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
@@ -63,8 +63,8 @@ export default function Albums({ match }) {
                     <FaChevronLeft /> Voltar
                 </Link>
             </Back>
-            <Content>
-                {!loading && album && (
+            <Content isLoading={loading}>
+                {!loading ? album && (
                     <>
                         <AlbumCard type="album" item={album} plusSize />
                         <div>
@@ -107,6 +107,8 @@ export default function Albums({ match }) {
                             ))}
                         </div>
                     </>
+                ) : (
+                    <FaSpinner color="#999" size={32} />
                 )}
             </Content>
         </>
