@@ -66,7 +66,7 @@ export default function Albums({ match }) {
             <Content isLoading={loading}>
                 {!loading ? album && (
                     <>
-                        <AlbumCard type="album" item={album} plusSize />
+                        <AlbumCard className="big" type="albums" item={album} plusSize />
                         <div>
                             {album.tracks.items.map(track => (
                                 <button

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Item = styled.li.attrs(props => ({
+export const Item = styled.div.attrs(props => ({
     plusSize: props.plusSize,
 }))`
     display: flex;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { FaSpinner } from 'react-icons/fa';
-import { Content, List } from './albumsList.styles';
+import { Content, Block } from './albumsList.styles';
 import AlbumCard from '../AlbumCard/AlbumCard';
 
 export default function AlbumsList({ title, data, type, loading }) {
@@ -10,11 +10,11 @@ export default function AlbumsList({ title, data, type, loading }) {
         <Content isLoading={loading}>
             <h2>{title}</h2>
             {!loading ? (
-                <List>
+                <Block>
                     {data.map(item => (
                         <AlbumCard key={item.id} item={item} type={type} />
                     ))}
-                </List>
+                </Block>
             ) : (
                 <FaSpinner color="#999" size={32} />
             )}
