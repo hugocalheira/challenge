@@ -4,7 +4,7 @@ import { FaMusic } from 'react-icons/fa';
 
 import { Block, Photo, NotAvailable } from './picture.styles';
 
-export default function Picture({ item, type, plusSize, playing }) {
+export default function Picture({ item, type, plusSize }) {
     function getPicture() {
         if (type !== 'tracks') {
             return item.images.length ? item.images[1].url : '';
