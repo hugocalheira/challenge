@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
     FaChevronLeft,
@@ -35,7 +35,8 @@ export default function Albums({ match }) {
                 }
             } catch (err) {
                 sessionStorage.removeItem('access_token');
-                isAuthenticated();
+                console.error(err);
+                setLoading(false);
             }
         }
         fetchData();
@@ -47,7 +48,7 @@ export default function Albums({ match }) {
         return `${minutes}:${`0${seconds}`.slice(-2)}`;
     }
 
-    return (
+    return (isAuthenticated()) ? (
         <>
             <Back>
                 <Link to="/">
@@ -112,6 +113,8 @@ export default function Albums({ match }) {
                 )}
             </Content>
         </>
+    ) : (
+        <Redirect to='/auth' />
     );
 }
 

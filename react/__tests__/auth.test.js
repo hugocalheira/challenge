@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 // const request = require('supertest');
-const sinon = require('sinon');
+// const sinon = require('sinon');
 const {
     isAuthenticated,
     getHeadersAuthorization,
@@ -17,7 +17,7 @@ describe('unit tests - isAuthenticated', () => {
 
     it('should return false when not exists a access_token', async () => {
         sessionStorage.removeItem('access_token');
-        sinon.stub(window.location, 'replace');
+        // sinon.stub(window.location, 'replace');
         expect(isAuthenticated()).toBe(false);
     });
 

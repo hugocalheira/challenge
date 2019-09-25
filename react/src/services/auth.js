@@ -28,9 +28,9 @@ export async function authenticate() {
 
 export const isAuthenticated = () => {
     const accessToken = sessionStorage.getItem('access_token');
-    if (!accessToken) {
-        authenticate();
-    }
+    // if (!accessToken) {
+    //     authenticate();
+    // }
     return accessToken || false;
 };
 
