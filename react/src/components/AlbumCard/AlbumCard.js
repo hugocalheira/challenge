@@ -5,25 +5,10 @@ import { FaPlay, FaPause } from 'react-icons/fa';
 
 import { Item } from './albumCard.styles';
 import Picture from '../Picture/Picture';
+import Player from '../../services/player';
 
 export default function AlbumCard({ item, type, plusSize }) {
     const [playing, setPlaying] = useState(false);
-
-    async function handleClick(track) {
-        const { id, preview_url: url } = track;
-        const audio = await new Audio(url);
-        if (playing) {
-            playing.audio.pause();
-        }
-
-        if (playing === false || audio.src !== playing.audio.src) {
-            setPlaying({ id, audio });
-            audio.play();
-            audio.addEventListener('ended', () => setPlaying(false));
-            return;
-        }
-        setPlaying(false);
-    }
 
     return (
         (item.preview_url || type !== 'tracks') && (
@@ -41,7 +26,7 @@ export default function AlbumCard({ item, type, plusSize }) {
                     <button
                         disabled={!item.preview_url}
                         type="button"
-                        onClick={() => handleClick(item)}
+                        onClick={() => Player(item, playing, setPlaying)}
                         className={
                             playing && playing.id === item.id
                                 ? 'card playing'

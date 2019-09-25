@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FaChevronLeft, FaPlay, FaPause, FaBan, FaSpinner } from 'react-icons/fa';
+import {
+    FaChevronLeft,
+    FaPlay,
+    FaPause,
+    FaBan,
+    FaSpinner,
+} from 'react-icons/fa';
 
 import AlbumCard from '../../components/AlbumCard/AlbumCard';
 import api from '../../services/api';
 import { isAuthenticated, getHeadersAuthorization } from '../../services/auth';
 import { Back, Content } from './styles';
+import Player from '../../services/player';
 
 export default function Albums({ match }) {
     const [album, setAlbum] = useState(false);
@@ -40,22 +47,6 @@ export default function Albums({ match }) {
         return `${minutes}:${`0${seconds}`.slice(-2)}`;
     }
 
-    async function handleClick(track) {
-        const { id, preview_url: url } = track;
-        const audio = await new Audio(url);
-        if (playing) {
-            playing.audio.pause();
-        }
-
-        if (playing === false || audio.src !== playing.audio.src) {
-            setPlaying({ id, audio });
-            audio.play();
-            audio.addEventListener('ended', () => setPlaying(false));
-            return;
-        }
-        setPlaying(false);
-    }
-
     return (
         <>
             <Back>
@@ -64,49 +55,58 @@ export default function Albums({ match }) {
                 </Link>
             </Back>
             <Content isLoading={loading}>
-                {!loading ? album && (
-                    <>
-                        <AlbumCard className="big" type="albums" item={album} plusSize />
-                        <div>
-                            {album.tracks.items.map(track => (
-                                <button
-                                    disabled={!track.preview_url}
-                                    className={
-                                        playing && playing.id === track.id
-                                            ? 'playing'
-                                            : ''
-                                    }
-                                    type="button"
-                                    key={track.id}
-                                    onClick={() => handleClick(track)}
-                                >
-                                    <span>{track.name}</span>
-                                    <span className="time">
-                                        <span
-                                            className={
-                                                track.preview_url === null
-                                                    ? 'disabled'
-                                                    : 'enabled'
-                                            }
-                                        >
-                                            <FaBan />
-                                        </span>
-                                        <span className="control">
-                                            {playing &&
-                                            playing.id === track.id ? (
-                                                <FaPause />
-                                            ) : (
-                                                <FaPlay />
+                {!loading ? (
+                    album && (
+                        <>
+                            <AlbumCard
+                                className="big"
+                                type="albums"
+                                item={album}
+                                plusSize
+                            />
+                            <div>
+                                {album.tracks.items.map(track => (
+                                    <button
+                                        disabled={!track.preview_url}
+                                        className={
+                                            playing && playing.id === track.id
+                                                ? 'playing'
+                                                : ''
+                                        }
+                                        type="button"
+                                        key={track.id}
+                                        onClick={() =>
+                                            Player(track, playing, setPlaying)
+                                        }
+                                    >
+                                        <span>{track.name}</span>
+                                        <span className="time">
+                                            <span
+                                                className={
+                                                    track.preview_url === null
+                                                        ? 'disabled'
+                                                        : 'enabled'
+                                                }
+                                            >
+                                                <FaBan />
+                                            </span>
+                                            <span className="control">
+                                                {playing &&
+                                                playing.id === track.id ? (
+                                                    <FaPause />
+                                                ) : (
+                                                    <FaPlay />
+                                                )}
+                                            </span>
+                                            {millisecondsToMinutesAndSeconds(
+                                                track.duration_ms
                                             )}
                                         </span>
-                                        {millisecondsToMinutesAndSeconds(
-                                            track.duration_ms
-                                        )}
-                                    </span>
-                                </button>
-                            ))}
-                        </div>
-                    </>
+                                    </button>
+                                ))}
+                            </div>
+                        </>
+                    )
                 ) : (
                     <FaSpinner color="#999" size={32} />
                 )}
