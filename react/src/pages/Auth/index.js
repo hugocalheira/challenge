@@ -40,8 +40,6 @@ export default function SpotifyAuth() {
 
     useEffect(() => {
         const params = getHashParams();
-        console.log(params)
-
         const { access_token, state } = params;
         const storedState = sessionStorage.getItem(stateKey);
 
