@@ -22,17 +22,17 @@ export const Container = styled.div`
 
     @media screen and (min-width: 900px) {
         button {
-        text-transform: none;
+            text-transform: none;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             margin: 20px auto;
-            width: 350px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             background: #161616;
             color:#f1f1f1;
-            border-radius: 5px;
+            border-radius: 50%;
             border: 0;
             font-size: 20px;
             font-weight: lighter;
@@ -40,27 +40,36 @@ export const Container = styled.div`
             transition: 1s box-shadow;
         }
 
-        button:hover {
+        /* button:hover {
             box-shadow: 0 5px 35px 0px rgba(0,0,0,1);
+        } */
+
+        button:hover,
+        button.loading{
+            box-shadow: 0 5px 35px 0px rgba(0,0,0,1);
+
+            &:before, 
+            &:after {
+                display: block;
+                content: '';
+                position: absolute;
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+                z-index: -1;
+                filter: blur(5px);
+                
+                background: #fb0094;
+                animation: .3s clockwise infinite;
+            }
+
+            &:after {
+                background:  #ffff00;
+                animation: .6s counterclockwise infinite;
+            }
         }
 
-        button:hover:before, button:hover:after {
-            display: block;
-            content: '';
-            position: absolute;
-            width: 350px;
-            height: 100px;
-            background: #fb0094;
-            border-radius: 5px;
-            z-index: -1;
-            animation: .3s clockwise infinite;
-            filter: blur(5px);
-        }
 
-        button:hover:after {
-            background:  #ffff00;
-            animation: .6s counterclockwise infinite;
-        }
     }
 
     @keyframes clockwise {

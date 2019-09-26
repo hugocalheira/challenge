@@ -24,6 +24,7 @@ function generateRandomString(length) {
 export default function SpotifyAuth() {
 
     const [accessToken, setAccessToken] = useState()
+    const [loading, setLoading] = useState(false)
 
     function getHashParams() {
         const hashParams = {};
@@ -48,7 +49,6 @@ export default function SpotifyAuth() {
             sessionStorage.setItem('access_token', access_token);
             setAccessToken(access_token)
         }
-        // sessionStorage.getItem('access_token');
 
         if (access_token && (state == null || state !== storedState)) {
             alert('There was an error during the authentication');
@@ -58,6 +58,7 @@ export default function SpotifyAuth() {
     },[])
 
     function handleRedirect() {
+        setLoading(true);
         const state = generateRandomString(16);
         sessionStorage.setItem(stateKey, state);
 
@@ -73,7 +74,7 @@ export default function SpotifyAuth() {
     
     return !accessToken ? (
         <Container>
-            <button onClick={handleRedirect}>Conecte sua conta do Spotify</button>
+            <button className={loading ? 'loading' : ''} onClick={handleRedirect}>{ !loading ? 'Conecte ao Spotify' : 'conectando...' }</button>
         </Container>
     ) : (
         <Redirect to='/' />
