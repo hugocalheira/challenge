@@ -33,7 +33,7 @@ export const Content = styled.div.attrs(props => ({
         `}
 `;
 
-export const List = styled.ul`
+export const Block = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { FaChevronLeft } from 'react-icons/fa';
 
@@ -65,17 +65,17 @@ export default function Home({ match }) {
                 if (response.data.tracks && response.data.tracks.items) {
                     setTracks(response.data.tracks.items);
                 }
+                setLoading(false);
             } catch (err) {
                 sessionStorage.removeItem('access_token');
-                isAuthenticated();
-                return;
+                console.error(err);
+                setLoading(false);
             }
-            setLoading(false);
         }
         fetchData();
     }, [search]);
 
-    return (
+    return (isAuthenticated()) ? (
         <>
             {!match.params.id ? (
                 <Search>
@@ -131,6 +131,8 @@ export default function Home({ match }) {
                 />
             )}
         </>
+    ) : (
+        <Redirect to='/auth' />
     );
 }
 

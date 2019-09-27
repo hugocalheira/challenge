@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaMusic } from 'react-icons/fa';
 
-import { Photo, NotAvailable } from './picture.styles';
+import { Block, Photo, NotAvailable } from './picture.styles';
 
 export default function Picture({ item, type, plusSize }) {
     function getPicture() {
@@ -21,7 +21,7 @@ export default function Picture({ item, type, plusSize }) {
     }
 
     return (
-        <>
+        <Block className={plusSize ? 'gradient-effect' : ''}>
             {getPicture() ? (
                 <Photo
                     alt={getAltName()}
@@ -33,7 +33,7 @@ export default function Picture({ item, type, plusSize }) {
                     <FaMusic />
                 </NotAvailable>
             )}
-        </>
+        </Block>
     );
 }
 
